@@ -15,16 +15,15 @@ module ImdbParty
       @genres = options["genres"] || []
 
       # parse directors
-      @directors = []
-      @directors = options["directors_summary"].map { |d| Person.new(d) }
+      @directors = options["directors_summary"] ? options["directors_summary"].map { |d| Person.new(d) } : []
 
       # parse directors
       @writers = []
-      @writers = options["writers_summary"].map { |w| Person.new(w) }
+      @writers = options["writers_summary"] ? options["writers_summary"].map { |w| Person.new(w) } : []
 
       # parse actors
       @actors = []
-      @actors = options["cast_summary"].map { |a| Person.new(a) }
+      @actors = options["cast_summary"] ? options["cast_summary"].map { |a| Person.new(a) } : []
 
       #parse trailers
       @trailers = {}
