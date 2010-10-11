@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{imdb_party}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jon Maddox"]
@@ -28,7 +28,9 @@ Gem::Specification.new do |s|
      "lib/imdb_party/httparty_icebox.rb",
      "lib/imdb_party/imdb.rb",
      "lib/imdb_party/movie.rb",
+     "lib/imdb_party/person.rb",
      "test/movie_test.rb",
+     "test/person_test.rb",
      "test/search_test.rb",
      "test/test_helper.rb"
   ]
@@ -39,6 +41,7 @@ Gem::Specification.new do |s|
   s.summary = %q{IMDB client using the IMDB API that their iPhone app uses}
   s.test_files = [
     "test/movie_test.rb",
+     "test/person_test.rb",
      "test/search_test.rb",
      "test/test_helper.rb"
   ]
