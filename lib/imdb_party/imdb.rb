@@ -1,9 +1,8 @@
 module ImdbParty
   class Imdb
     include HTTParty
-    # include HTTParty::Icebox
-    # attr_accessor :language
-    # cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
+    include HTTParty::Icebox
+    cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
     
     base_uri 'app.imdb.com'
     default_params = {"api" => "v1", "appid" => "iphone1", "locale" => "en_US", "timestamp" => Time.now.to_i, "sig" => "heres my signature"}
