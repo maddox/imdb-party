@@ -16,6 +16,16 @@ class SearchTest < Test::Unit::TestCase
       end
     end
 
+    context "search for bad title with no results" do
+      setup do
+        @results = @imdb.find_by_title("sdkljlkkl123j4lk23kl3")
+      end
+      
+      should "have 15 results" do
+        assert_equal 0, @results.size
+      end
+    end
+
     context "find movie by id" do
       setup do
         @movie = @imdb.find_movie_by_id("tt0382932")
