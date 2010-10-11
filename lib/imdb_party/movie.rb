@@ -15,12 +15,15 @@ module ImdbParty
       @genres = options["genres"] || []
 
       # parse directors
+      @directors = []
       @directors = options["directors_summary"].map { |d| Person.new(d) }
 
       # parse directors
+      @writers = []
       @writers = options["writers_summary"].map { |w| Person.new(w) }
 
       # parse actors
+      @actors = []
       @actors = options["cast_summary"].map { |a| Person.new(a) }
 
       #parse trailers
@@ -30,9 +33,7 @@ module ImdbParty
           @trailers[v["format"]] = v["url"]
         end
       end
-      
-      
+
     end
-    
   end
 end
