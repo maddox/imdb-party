@@ -15,22 +15,13 @@ module ImdbParty
       @genres = options["genres"] || []
 
       # parse directors
-      @directors = []
-      options["directors_summary"].each do |d|
-        @directors << d["name"]["name"] if d["name"] && d["name"]["name"]
-      end
+      @directors = options["directors_summary"].map { |d| Person.new(d) }
 
       # parse directors
-      @writers = []
-      options["writers_summary"].each do |w|
-        @writers << w["name"]["name"] if w["name"] && w["name"]["name"]
-      end
+      @writers = options["writers_summary"].map { |w| Person.new(w) }
 
-      # parse directors
-      @actors = []
-      options["cast_summary"].each do |a|
-        @actors << a["name"]["name"] if a["name"] && a["name"]["name"]
-      end
+      # parse actors
+      @actors = options["cast_summary"].map { |a| Person.new(a) }
 
       #parse trailers
       @trailers = {}
