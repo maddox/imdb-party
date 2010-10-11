@@ -40,7 +40,5 @@ module ImdbParty
       results["data"]["list"].map { |r| {:title => r["title"], :imdb_id => r["tconst"], :year => r["year"], :poster_url => (r["image"] ? r["image"]["url"] : nil)} }
     end
     
-
-    
   end
 end
