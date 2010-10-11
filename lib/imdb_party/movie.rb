@@ -34,7 +34,7 @@ module ImdbParty
 
       #parse trailers
       @trailers = {}
-      if options["trailer"]["encodings"] && options["trailer"]
+      if options["trailer"] && options["trailer"]["encodings"]
         options["trailer"]["encodings"].each_pair do |k,v|
           @trailers[v["format"]] = v["url"]
         end
