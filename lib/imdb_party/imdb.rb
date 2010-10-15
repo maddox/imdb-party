@@ -17,7 +17,7 @@ module ImdbParty
           result_section["list"].each do |r| 
             h = {:title => r["title"], :year => r["year"], :imdb_id => r["tconst"]}
             h.merge!(:poster_url => r["image"]["url"]) if r["image"] && r["image"]["url"]
-            movie_results << h if r["type"] == "feature"
+            movie_results << h
           end
         end
       end
@@ -27,7 +27,6 @@ module ImdbParty
 
     def find_movie_by_id(imdb_id)
       result = self.class.get('/title/maindetails', :query => {:tconst => imdb_id}).parsed_response
-      puts result.inspect
       Movie.new(result["data"])
     end
     
