@@ -21,7 +21,7 @@ class SearchTest < Test::Unit::TestCase
         @results = @imdb.find_by_title("sdkljlkkl123j4lk23kl3")
       end
       
-      should "have 15 results" do
+      should "have 0 results" do
         assert_equal 0, @results.size
       end
     end
