@@ -11,8 +11,8 @@ class SearchTest < Test::Unit::TestCase
         @results = @imdb.find_by_title("ratatouille")
       end
       
-      should "have 15 results" do
-        assert_equal 15, @results.size
+      should "have at least 15 results" do
+        assert (@results.size > 15)
       end
     end
 
