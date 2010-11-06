@@ -14,7 +14,8 @@ module ImdbParty
       
       if results["data"]["results"]
         results["data"]["results"].each do |result_section|
-          result_section["list"].each do |r| 
+          result_section["list"].each do |r|
+            next unless r["tconst"] && r["title"]
             h = {:title => r["title"], :year => r["year"], :imdb_id => r["tconst"]}
             h.merge!(:poster_url => r["image"]["url"]) if r["image"] && r["image"]["url"]
             movie_results << h
