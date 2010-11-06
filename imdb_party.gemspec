@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{imdb_party}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jon Maddox"]
-  s.date = %q{2010-10-15}
+  s.date = %q{2010-11-06}
   s.description = %q{IMDB client using the IMDB API that their iPhone app uses}
   s.email = %q{jon@mustacheinc.com}
   s.extra_rdoc_files = [
