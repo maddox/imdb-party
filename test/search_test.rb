@@ -11,17 +11,27 @@ class SearchTest < Test::Unit::TestCase
         @results = @imdb.find_by_title("ratatouille")
       end
       
-      should "have 15 results" do
-        assert_equal 15, @results.size
+      should "have at least 15 results" do
+        assert (@results.size >= 15)
       end
     end
 
+    context "search for title with spaces in the name" do
+      setup do
+        @results = @imdb.find_by_title("the truman show")
+      end
+      
+      should "have at least 1 result" do
+        assert (@results.size >= 1)
+      end
+    end
+    
     context "search for bad title with no results" do
       setup do
         @results = @imdb.find_by_title("sdkljlkkl123j4lk23kl3")
       end
       
-      should "have 15 results" do
+      should "have 0 results" do
         assert_equal 0, @results.size
       end
     end
