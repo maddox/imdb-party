@@ -13,7 +13,7 @@ module ImdbParty
       @release_date = options["release_date"]["normal"] if options["release_date"] && options["release_date"]["normal"]
       @certification = options["certificate"]["certificate"] if options["certificate"] && options["certificate"]["certificate"]
       @genres = options["genres"] || []
-
+      
       # parse directors
       @directors = options["directors_summary"] ? options["directors_summary"].map { |d| Person.new(d) } : []
 

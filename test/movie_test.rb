@@ -68,6 +68,11 @@ class MovieTest < Test::Unit::TestCase
       assert_equal Array, @movie.writers.class
       assert_equal 2, @movie.writers.size
     end
-
+    
+    should "always return a date object when requesting the release date" do
+      @movie = @imdb.find_movie_by_id("tt0066026")
+      assert_equal DateTime.parse("1970-03-01"), @movie.release_date
+      assert_equal Date, @movie.release_date.class
+    end
   end
 end
