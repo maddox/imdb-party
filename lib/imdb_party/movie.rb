@@ -14,6 +14,7 @@ module ImdbParty
       @certification = options["certificate"]["certificate"] if options["certificate"] && options["certificate"]["certificate"]
       @genres = options["genres"] || []
       
+      @release_date = Date.parse(@release_date << "-01") if @release_date.class == "String" && @release_date.match(/\d{4}-\d{2}/)
       # parse directors
       @directors = options["directors_summary"] ? options["directors_summary"].map { |d| Person.new(d) } : []
 
