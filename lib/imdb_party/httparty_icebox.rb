@@ -211,7 +211,7 @@ module HTTParty #:nodoc:
           true
         end
         def get(key)
-          data = Marshal.load(File.read( @path.join(key)))
+          data = Marshal.load(File.new(@path.join(key)))
           Cache.logger.info("Cache: #{data.nil? ? "miss" : "hit"} (#{key})")
           data
         end
