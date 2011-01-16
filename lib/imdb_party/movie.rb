@@ -14,8 +14,15 @@ module ImdbParty
       @certification = options["certificate"]["certificate"] if options["certificate"] && options["certificate"]["certificate"]
       @genres = options["genres"] || []
       
-      @release_date = Date.parse(@release_date << "-01") if @release_date.class == String && @release_date.match(/\d{4}-\d{2}/)
-      
+      # Sometimes the @release_date object is a string instead of a date object
+      if @release_date.class == String
+        [{:regex => /^\d{4}-\d{2}$/, :concat => "-01"}, {:regex => /^\d{4}$/, :concat => "-01-01"}].each do |value|
+          if @release_date.match(value[:regex])
+            @release_date = Date.parse(@release_date << value[:concat]); break
+          end
+        end
+      end
+        
       # parse directors
       @directors = options["directors_summary"] ? options["directors_summary"].map { |d| Person.new(d) } : []
 
