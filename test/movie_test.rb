@@ -70,9 +70,11 @@ class MovieTest < Test::Unit::TestCase
     end
     
     should "always return a date object when requesting the release date" do
-      @movie = @imdb.find_movie_by_id("tt0066026")
-      assert_equal DateTime.parse("1970-03-01"), @movie.release_date
-      assert_equal Date, @movie.release_date.class
+      [{:imdb => "tt0066026", :date => "1970-03-01"}, {:imdb => "tt1446072", :date => "2010-01-01"}].each do |value|
+        movie = @imdb.find_movie_by_id(value[:imdb])
+        assert_equal DateTime.parse(value[:date]), movie.release_date
+        assert_equal Date, movie.release_date.class
+      end
     end
   end
 end
