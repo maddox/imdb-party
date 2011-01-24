@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Linus Oleander", "Jon Maddox"]
   s.email       = ["linus@oleander.nu", "jon@mustacheinc.com"]
-  s.homepage    = "https://github.com/oleander/Undertexter"
+  s.homepage    = "http://github.com/oleander/MovieSearcher"
   s.summary     = %q{IMDB client using the IMDB API that their iPhone app uses}
   s.description = %q{IMDB client using the IMDB API that their iPhone app uses. It can also figure out what movie you are looking for just by looking at the release name of the movie}
 
