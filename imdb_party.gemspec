@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{imdb_party}
-  s.version = "0.4.0"
+  s.name = %q{MovieSearcher}
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jon Maddox"]
-  s.date = %q{2011-01-04}
+  s.authors = ["Linus Oleander", "Jon Maddox"]
+  s.date = %q{2011-01-24}
   s.description = %q{IMDB client using the IMDB API that their iPhone app uses}
-  s.email = %q{jon@mustacheinc.com}
+  s.emails = %w{linus@oleande.nu, jon@mustacheinc.com}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
     "test/search_test.rb",
     "test/test_helper.rb"
   ]
-  s.homepage = %q{http://github.com/maddox/imdb_party}
+  s.homepage = %q{https://github.com/oleander/MovieSearcher}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{IMDB client using the IMDB API that their iPhone app uses}
