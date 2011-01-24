@@ -14,11 +14,11 @@ describe MovieSearcher do
   end
   
   it "should return nil if the movie title is to long" do
-    MovieSearcher.find("asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd").should be_nil
+    MovieSearcher.find_by_release_name("asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd").should be_nil
   end
   
   it "should return nil when setting the limit to low" do
-    MovieSearcher.find('Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny', :options => {:limit => 0}).should be_nil
+    MovieSearcher.find_by_release_name('Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny', :options => {:limit => 0}).should be_nil
   end
   
   it "should return the right movie" do
@@ -31,16 +31,16 @@ describe MovieSearcher do
     },{
       :title => "Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny", :iid => "tt1536044"
     }].each do |movie|
-      MovieSearcher.find(movie[:title]).imdb_id.should eq(movie[:iid])
+      MovieSearcher.find_by_release_name(movie[:title]).imdb_id.should eq(movie[:iid])
     end
   end
   
   it "should return nil if no value is being passed to it" do
-    MovieSearcher.find("").should be_nil
+    MovieSearcher.find_by_release_name("").should be_nil
   end
   
   it "should return nil if nil is being passed to it" do
-    MovieSearcher.find(nil).should be_nil
+    MovieSearcher.find_by_release_name(nil).should be_nil
   end
 end
 

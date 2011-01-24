@@ -21,7 +21,6 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
-    shoulda (2.11.3)
 
 PLATFORMS
   ruby
@@ -31,4 +30,3 @@ DEPENDENCIES
   httparty
   levenshtein
   rspec
-  shoulda

@@ -15,7 +15,7 @@ class MovieSearcher
     @options.merge!(args[:options]) unless args[:options].nil?
   end
   
-  def self.find(search_value, options = {})
+  def self.find_by_release_name(search_value, options = {})
     this = MovieSearcher.new(options.merge(:search_value => search_value.to_s))
     return if this.to_long?
     
