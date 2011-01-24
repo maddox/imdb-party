@@ -121,7 +121,7 @@ describe MovieSearcher, "should work as before" do
 end
 
 describe MovieSearcher, "should also work as before" do
-  it "have at least 15 results" do
+  it "should have at least 15 results" do
     MovieSearcher.should have_at_least(15).find_by_title("ratatouille")
   end
 
