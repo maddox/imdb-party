@@ -28,7 +28,7 @@ module ImdbParty
 
     def find_movie_by_id(imdb_id)
       result = self.class.get('/title/maindetails', :query => {:tconst => imdb_id}).parsed_response
-      Movie.new(result["data"])
+      Movie.new(result["data"]) unless result["data"].nil?
     end
     
     def top_250

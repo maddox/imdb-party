@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    imdb_party (0.4.0)
+    MovieSearcher (0.0.1)
       httparty
+      levenshtein
 
 GEM
   remote: http://rubygems.org/
@@ -11,6 +12,7 @@ GEM
     diff-lcs (1.1.2)
     httparty (0.7.3)
       crack (= 0.1.8)
+    levenshtein (0.2.0)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -25,6 +27,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  imdb_party!
+  MovieSearcher!
+  httparty
+  levenshtein
   rspec
   shoulda

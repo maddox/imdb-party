@@ -3,6 +3,10 @@ module ImdbParty
     attr_accessor :imdb_id, :title, :directors, :writers, :tagline, :company, :plot, :runtime, :rating, :poster_url, :release_date, :certification, :genres, :actors, :trailers
 
     def initialize(options={})
+      if not options.nil? and options.keys.first.class == Symbol
+        options.keys.each { |name| instance_variable_set "@" + name.to_s, options[name] }; return
+      end
+      
       @imdb_id = options["tconst"]
       @title = options["title"]
       @tagline = options["tagline"]

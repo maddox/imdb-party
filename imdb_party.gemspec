@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Linus Oleander", "Jon Maddox"]
   s.date = %q{2011-01-24}
   s.description = %q{IMDB client using the IMDB API that their iPhone app uses}
-  s.emails = %w{linus@oleande.nu, jon@mustacheinc.com}
+  s.email = %q{jon@mustacheinc.com}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
   ]
   
   s.add_development_dependency('rspec')
+  s.add_dependency('levenshtein')
   
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
