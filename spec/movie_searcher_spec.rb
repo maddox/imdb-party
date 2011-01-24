@@ -122,28 +122,28 @@ end
 
 describe MovieSearcher, "should also work as before" do
   it "should have at least 15 results" do
-    MovieSearcher.should have_at_least(15).find_by_title("ratatouille")
+    MovieSearcher.find_by_title("ratatouille").count.should >= 15
   end
 
   it "search for title with spaces in the name" do
-    MovieSearcher.should have_at_least(1).find_by_title("the truman show")
+    MovieSearcher.find_by_title("the truman show").count.should >= 1
   end
 
   it "search for bad title with no results" do
-    MovieSearcher.should have(0).find_by_title("sdkljlkkl123j4lk23kl3")
+    MovieSearcher.find_by_title("sdkljlkkl123j4lk23kl3").count.should eq(0)
   end
 
   it "find movie by id" do
     MovieSearcher.find_movie_by_id("tt0382932").should be_instance_of(ImdbParty::Movie)
   end
   
-  it "be an Array of Hashes" do
+  it "be an Array of {ImdbParty::Movie}" do
     MovieSearcher.top_250.should be_instance_of(Array)
-    MovieSearcher.top_250.first.should be_instance_of(Hash)
+    MovieSearcher.top_250.first.should be_instance_of(ImdbParty::Movie)
   end
 
   it "find popular shows" do
     MovieSearcher.popular_shows.should be_instance_of(Array)
-    MovieSearcher.popular_shows.first.should be_instance_of(Hash)
+    MovieSearcher.popular_shows.first.should be_instance_of(ImdbParty::Movie)
   end  
 end

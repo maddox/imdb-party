@@ -58,7 +58,6 @@ class MovieSearcher
   def self.method_missing(m, *args, &block)  
     result = ImdbParty::Imdb.new.send(m, *args)
     return if result.nil?
-    puts "OKEJ: #{result.class}"
     result.class == Array ? result.map{|r| ImdbParty::Movie.new(r)} : result
   end
 end
