@@ -147,3 +147,33 @@ describe MovieSearcher, "should also work as before" do
     MovieSearcher.popular_shows.first.should be_instance_of(ImdbParty::Movie)
   end  
 end
+
+describe MovieSearcher, "should still have the same people" do
+  before(:all) do
+    @movie = MovieSearcher.find_movie_by_id("tt0382932")
+  end
+
+  it "have a name" do
+    @movie.actors.map(&:name).should include('Patton Oswalt')
+  end
+
+  it "have a role" do
+    @movie.actors.map(&:role).should include('Remy')
+  end
+
+  it "have a name" do
+    @movie.directors.map(&:name).should include('Brad Bird')
+  end
+
+  it "not have a role" do
+    @movie.directors.first.role.should be_nil
+  end
+
+  it "have a name" do
+    @movie.writers.map(&:name).should include('Brad Bird')
+  end
+
+  it "not have a role" do
+    @movie.writers.first.role.should be_nil
+  end
+end
