@@ -31,11 +31,7 @@ class MovieSearcher
   end
   
   def to_long?
-    @split = self.cleaner(@search_value).split(@options[:split])
-    
-    puts "NEW: #{self.cleaner(@search_value)}"
-    puts "OLD: #{@search_value}"
-    
+    @split = self.cleaner(@search_value).split(@options[:split])    
     @split.length > @options[:long]
   end
   
