@@ -2,6 +2,8 @@ require "imdb_party"
 require 'levenshtein'
 
 class MovieSearcher
+  attr_accessor :options
+  
   def initialize(args)
     args.keys.each { |name| instance_variable_set "@" + name.to_s, args[name] unless name == :options }
     
@@ -19,7 +21,11 @@ class MovieSearcher
     this = MovieSearcher.new(options.merge(:search_value => search_value.to_s))
     return if this.to_long?
     
-    return this.find_the_movie!
+    movie = this.find_the_movie!
+    return if movie.nil?
+    
+    # If the user wants for information about the movie, the {options[:details]} option should be true
+    this.options[:details] ? self.find_movie_by_id(movie.imdb_id) : movie
   end
   
   def to_long?
@@ -55,8 +61,8 @@ class MovieSearcher
     return ImdbParty::Movie.new(movie.first)
   end
   
-  def self.method_missing(m, *args, &block)  
-    result = ImdbParty::Imdb.new.send(m, *args)
+  def self.method_missing(method, *args, &block)  
+    result = ImdbParty::Imdb.new.send(method, *args)
     return if result.nil?
     result.class == Array ? result.map{|r| ImdbParty::Movie.new(r)} : result
   end

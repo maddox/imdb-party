@@ -42,6 +42,14 @@ describe MovieSearcher do
   it "should return nil if nil is being passed to it" do
     MovieSearcher.find_by_release_name(nil).should be_nil
   end
+  
+  it "should not have a rating if the details option isn't being passed" do
+    MovieSearcher.find_by_release_name('Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny').rating.should be_nil
+  end
+  
+  it "should return a rating if the detail option is being passed" do
+    MovieSearcher.find_by_release_name('Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny', :options => {:details => true}).rating.should_not be_nil
+  end
 end
 
 describe MovieSearcher, "should work as before" do
