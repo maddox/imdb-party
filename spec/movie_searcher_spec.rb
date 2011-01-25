@@ -101,21 +101,25 @@ describe MovieSearcher, "should work as before" do
 
   it "have genres" do
     @movie.genres.should be_instance_of(Array)
+    @movie.genres.each{|genre| genre.should be_instance_of(String)}
     @movie.should have(4).genres
   end
 
   it "have actors" do
     @movie.actors.should be_instance_of(Array)
+    @movie.actors.each{|actor| actor.should be_instance_of(ImdbParty::Person)}
     @movie.should have(4).actors
   end
 
   it "have directors" do
     @movie.directors.should be_instance_of(Array)
+    @movie.directors.each{|director| director.should be_instance_of(ImdbParty::Person)}
     @movie.should have(2).directors
   end
 
   it "have writers" do
     @movie.writers.should be_instance_of(Array)
+    @movie.writers.each{|writer| writer.should be_instance_of(ImdbParty::Person)}
     @movie.should have(2).writers
   end
   
@@ -161,27 +165,27 @@ describe MovieSearcher, "should still have the same people" do
     @movie = MovieSearcher.find_movie_by_id("tt0382932")
   end
 
-  it "have a name" do
+  it "should have a name" do
     @movie.actors.map(&:name).should include('Patton Oswalt')
   end
 
-  it "have a role" do
+  it "should have a role" do
     @movie.actors.map(&:role).should include('Remy')
   end
 
-  it "have a name" do
+  it "should have a name" do
     @movie.directors.map(&:name).should include('Brad Bird')
   end
 
-  it "not have a role" do
+  it "should not have a role" do
     @movie.directors.first.role.should be_nil
   end
 
-  it "have a name" do
+  it "should have a name" do
     @movie.writers.map(&:name).should include('Brad Bird')
   end
 
-  it "not have a role" do
+  it "should not have a role" do
     @movie.writers.first.role.should be_nil
   end
 end
