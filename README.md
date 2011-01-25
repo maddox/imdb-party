@@ -1,26 +1,59 @@
-# ImdbParty!
+# MovieSearcher - the almighty movie search gem
 
-## How To Use
+## What is MovieSearcher
 
-### Create an instance
+MovieSearcher makes it possible to get information about a movie.
+It uses IMDB's API that their iPhone applications rely on.
 
-    imdb = ImdbParty::Imdb.new
+It's build on top of [maddox's](https://github.com/maddox) [imdb-party](https://github.com/maddox/imdb-party) but adds some extra functionality and bugs fixes.
+
+## What makes this gem so awesome?
+MovieSearcher has a really cool feature called `find_by_release_name` that makes it possible to search for a movie based on the release name.
+You can for example specify *Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE* and it will return the not to good (Heartbreaker)[http://www.imdb.com/title/tt1465487/] by (Pascal Chaumeil)[http://www.imdb.com/name/nm0154312/]
+
+## So how do I use it?
+
+### Start by installing the gem
+
+    sudo gem install movie_searcher
+Start `irb` and include the gem, `require 'movie_searcher'`
+
 ### Search for a movie by title
 
-    imdb.find_by_title("The Dark Knight") => [{:title => "The Dark Knight", :year => "2008", :imdb_id => "tt0468569"}, {:title => "Batman Unmasked", ...}]
+    $ MovieSearcher.find_by_title("The Dark Knight")
+    => [{:title => "The Dark Knight", :year => "2008", :imdb_id => "tt0468569"}, {:title => "Batman Unmasked", ...}]
 
-### Get a movie by its imdb_id
+### Get a movie by its imdb id
 
-    movie = imdb.find_movie_by_id("tt0468569")
-
-    movie.title => "The Dark Knight"
-    movie.rating => 8.1
-    movie.certification => "PG-13"
+    $ movie = MovieSearcher.find_movie_by_id("tt0468569")
+    => 
+    $ movie.title 
+    => "The Dark Knight"
+    $ movie.rating 
+    => 8.1
+    $ movie.certification 
+    => "PG-13"
 
 ### Find the top 250 movies of all time
 
-    imdb.top_250 => [{:title => "Shawshank Redemption", :year => "1994", :imdb_id => "tt0111161"}, {:title => "The Godfather", ...}]
+    $ MovieSearcher.top_250 
+    => [{:title => "Shawshank Redemption", :year => "1994", :imdb_id => "tt0111161"}, {:title => "The Godfather", ...}]
 
 ### Get the currently popular tv shows
 
-    imdb.popular_shows => [{:title => "Glee", :year => "2009", :imdb_id => "tt1327801"}, {:title => "Dexter", ...}]
+    $ MovieSearcher.popular_shows 
+    => [{:title => "Glee", :year => "2009", :imdb_id => "tt1327801"}, {:title => "Dexter", ...}]
+### Search for a release name
+    $ MovieSearcher.find_by_release_name("Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE").imdb_id 
+    => tt1465487
+    
+## This sounds supr, how do I help?
+
+- Start by copying the project or make your own branch.
+- Navigate to the root path of the project and run `bundle`.
+- Start by running all tests using rspec, `rspec spec/movie_searcher_spec.rb`.
+- Implement your own code, write some tests, commit and do a pull request.
+
+## Requirements
+
+The gem is tested in OS X 10.6.6 using Ruby 1.8.7.

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    MovieSearcher (0.0.1)
+    movie_searcher (0.0.2)
       httparty
       levenshtein
 
@@ -26,7 +26,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  MovieSearcher!
-  httparty
-  levenshtein
+  movie_searcher!
   rspec

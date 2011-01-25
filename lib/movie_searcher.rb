@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../imdb_party.rb"
+require "imdb_party"
 require 'levenshtein'
 
 class MovieSearcher
