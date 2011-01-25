@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    movie_searcher (0.0.4)
+    movie_searcher (0.0.5)
       hintable_levenshtein
       httparty
 

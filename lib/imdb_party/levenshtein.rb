@@ -1,4 +1,6 @@
 # Some code borrowed from http://www.erikveen.dds.nl/levenshtein/doc/index.html
+require 'hintable_levenshtein'
+
 class Levenshtein
   def self.distance(s1, s2, threshold = nil)
     

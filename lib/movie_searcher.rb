@@ -1,5 +1,5 @@
 require "imdb_party"
-require 'hintable_levenshtein'
+require 'imdb_party/levenshtein'
 
 class MovieSearcher
   attr_accessor :options
