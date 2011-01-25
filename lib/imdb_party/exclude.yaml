@@ -1,0 +1,20 @@
+excluded:
+  - EXTENDED
+  - "((xvid(-[a-z]+)?))"
+  - 480p
+  - B(R|D)Rip
+  - cam
+  - telesync|([^a-z])ts([^a-z]?)
+  - telecine|([^a-z])tc([^a-z]?)
+  - "([^a-z])rx([^a-z]?)"
+  - dvdscr
+  - screener
+  - hdtv
+  - dvdrip
+  - workprint
+  - brrip|bluray|blu(-?)ray
+  - dvd(-?)r
+  - x264
+  - UNRATED
+  - IMAGiNE
+  - SCR

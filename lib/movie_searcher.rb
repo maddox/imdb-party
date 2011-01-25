@@ -2,7 +2,7 @@ require "imdb_party"
 require 'imdb_party/levenshtein'
 
 class MovieSearcher
-  attr_accessor :options
+  attr_accessor :options, :cleaners
   
   def initialize(args)
     args.keys.each { |name| instance_variable_set "@" + name.to_s, args[name] unless name == :options }
@@ -15,6 +15,8 @@ class MovieSearcher
     }
     
     @options.merge!(args[:options]) unless args[:options].nil?
+    
+    @cleaners = YAML.load(File.read("#{File.dirname(__FILE__)}/imdb_party/exclude.yaml"))["excluded"]
   end
   
   def self.find_by_release_name(search_value, options = {})
@@ -29,7 +31,11 @@ class MovieSearcher
   end
   
   def to_long?
-    @split = @search_value.split(@options[:split])
+    @split = self.cleaner(@search_value).split(@options[:split])
+    
+    puts "NEW: #{self.cleaner(@search_value)}"
+    puts "OLD: #{@search_value}"
+    
     @split.length > @options[:long]
   end
   
@@ -39,17 +45,14 @@ class MovieSearcher
     until current <= 0 do
       title = @split.take(current).join(' ')
       movies = @options[:imdb].find_by_title(title)
-      break if movies.any?
+      break if movies.any? and movies.reject{ |movie| self.shortest(self.super_cleaner(movie[:title]), self.super_cleaner(self.cleaner(title))).nil? }.any?
       current -= 1 
     end
     
     return if movies.nil? or not movies.any?
-    
-    # Cleaning up the title, no years allowed
-    title = title.gsub(/[^a-z0-9]/i, '').gsub(/(19|20)\d{2}/, '')
-    
+
     movie = movies.map do |movie| 
-      [movie, Levenshtein.distance(movie[:title].gsub(/[^a-z0-9]/i, ''), title, @options[:limit])]
+      [movie, self.shortest(movie[:title], title)]
     end.reject do |value|
       value.last.nil?
     end.sort_by do |_,value|
@@ -65,5 +68,21 @@ class MovieSearcher
     result = ImdbParty::Imdb.new.send(method, *args)
     return if result.nil?
     result.class == Array ? result.map{|r| ImdbParty::Movie.new(r)} : result
+  end
+  
+  def cleaner(string)
+    @cleaners.each do |clean|
+      string.gsub!(/#{clean}/i, ' ')
+    end
+    
+    string.gsub(/(19|20)\d{2}/, '').gsub(/\s*-\s*/, '').gsub(/\s{2,}/, '').strip
+  end
+  
+  def shortest(a,b)
+    Levenshtein.distance(self.super_cleaner(a), self.super_cleaner(self.cleaner(b)), @options[:limit])
+  end
+  
+  def super_cleaner(string)
+    string.gsub(/[^a-z0-9]/i, '')
   end
 end

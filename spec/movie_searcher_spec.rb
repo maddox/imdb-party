@@ -17,10 +17,6 @@ describe MovieSearcher do
     MovieSearcher.find_by_release_name("asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd").should be_nil
   end
   
-  it "should return nil when setting the limit to low" do
-    MovieSearcher.find_by_release_name('Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny', :options => {:limit => 0}).should be_nil
-  end
-  
   it "should return the right movie" do
     [{
       :title => "Live Free Or Die Hard 2007 DVDRIP XviD-CRNTV", :iid => "tt0337978"
@@ -188,5 +184,34 @@ describe MovieSearcher, "should still have the same people" do
 
   it "should not have a role" do
     @movie.writers.first.role.should be_nil
+  end
+end
+
+describe MovieSearcher, "should have a cleaner" do
+  before(:all) do
+    @movie = MovieSearcher.new({})
+  end
+  
+  it "should contain a list of at least 15 cleaners" do
+    @movie.should have_at_least(15).cleaners
+  end
+  
+  it "should clean up this release names" do
+    [{
+      :string => "Unstoppable 2010 BDRip XviD-REMALiA", 
+      :exclude => ["2010", "BDRip", "XviD"]
+    }, {
+      :string => "True Grit 2010 SCR XViD - IMAGiNE",
+      :exclude => ["2010", "SCR", "XViD", "IMAGiNE", "-"]
+    }].each do |value|
+      string = @movie.cleaner(value[:string])
+      value[:exclude].each do |exclude|
+        string.should_not include(exclude)
+      end
+    end
+  end
+  
+  it "should not contain to many spaces in a row" do
+    @movie.cleaner("Unstoppable 2010 BDRip XviD-REMALiA").should_not match(/\s{2,}/)
   end
 end
