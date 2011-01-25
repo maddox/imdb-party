@@ -98,4 +98,4 @@ The `actors`, `writers` and `directors` accessors returns an `ImdbParty::Person`
 
 ## Requirements
 
-The gem is tested in OS X 10.6.6 using Ruby 1.8.7.
+The gem is tested in OS X 10.6.6 using Ruby 1.8.7 and 1.9.2
