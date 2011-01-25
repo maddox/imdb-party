@@ -1,5 +1,5 @@
 require "imdb_party"
-require 'levenshtein'
+require 'hintable_levenshtein'
 
 class MovieSearcher
   attr_accessor :options
@@ -49,7 +49,7 @@ class MovieSearcher
     title = title.gsub(/[^a-z0-9]/i, '').gsub(/(19|20)\d{2}/, '')
     
     movie = movies.map do |movie| 
-      [movie, Levenshtein.normalized_distance(movie[:title].gsub(/[^a-z0-9]/i, ''), title, @options[:limit])]
+      [movie, Levenshtein.distance(movie[:title].gsub(/[^a-z0-9]/i, ''), title, @options[:limit])]
     end.reject do |value|
       value.last.nil?
     end.sort_by do |_,value|
