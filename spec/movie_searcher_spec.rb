@@ -25,8 +25,11 @@ describe MovieSearcher do
     }, {
       :title => "Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE", :iid => "tt1465487"
     },{
-      :title => "Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny", :iid => "tt1536044",
+      :title => "Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny", :iid => "tt1536044"
+    }, {
       :title => "The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC", :iid => "tt0840361"
+    }, {
+      :title => "I Spit On Your Grave UNRATED 2010 DVDRip XviD-TWiZTED", :iid => "tt1242432"
     }].each do |movie|
       MovieSearcher.find_by_release_name(movie[:title]).imdb_id.should eq(movie[:iid])
     end
@@ -203,6 +206,15 @@ describe MovieSearcher, "should have a cleaner" do
     }, {
       :string => "True Grit 2010 SCR XViD - IMAGiNE",
       :exclude => ["2010", "SCR", "XViD", "IMAGiNE", "-"]
+    }, {
+      :string => "Black Swan 2010 DVDSCR XviD-ViSiON",
+      :exclude => ["2010", "DVDSCR", "XviD-ViSiON"]
+    }, {
+      :string => "Red 2010 720p BRRip XviD AC3-FLAWL3SS",
+      :exclude => ["720p", "BRRip", "XviD", "AC3-FLAWL3SS"]
+    }, {
+      :string => "I Spit On Your Grave UNRATED 2010 DVDRip 480p XviD-TWiZTED",
+      :exclude => ["UNRATED", "2010", "DVDRip", "XviD-TWiZTED", "XviD", "480p"]
     }].each do |value|
       string = @movie.cleaner(value[:string])
       value[:exclude].each do |exclude|
@@ -213,5 +225,13 @@ describe MovieSearcher, "should have a cleaner" do
   
   it "should not contain to many spaces in a row" do
     @movie.cleaner("Unstoppable 2010 BDRip XviD-REMALiA").should_not match(/\s{2,}/)
+  end
+  
+  it "should not contain any dots" do
+    @movie.cleaner("The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC").should_not match(/\./)
+  end
+  
+  it "should not contain any -" do
+    @movie.cleaner("The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC").should_not match(/-/)
   end
 end

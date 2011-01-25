@@ -45,14 +45,14 @@ class MovieSearcher
     until current <= 0 do
       title = @split.take(current).join(' ')
       movies = @options[:imdb].find_by_title(title)
-      break if movies.any? and movies.reject{ |movie| self.shortest(self.super_cleaner(movie[:title]), self.super_cleaner(self.cleaner(title))).nil? }.any?
+      break if movies.any? and movies.reject{ |movie| self.shortest(movie, title).nil? }.any?
       current -= 1 
     end
     
     return if movies.nil? or not movies.any?
 
     movie = movies.map do |movie| 
-      [movie, self.shortest(movie[:title], title)]
+      [movie, self.shortest(movie, title)]
     end.reject do |value|
       value.last.nil?
     end.sort_by do |_,value|
@@ -61,25 +61,33 @@ class MovieSearcher
     
     return if movie.nil?
     
-    return ImdbParty::Movie.new(movie.first)
+    ImdbParty::Movie.new(movie.first)
   end
   
   def self.method_missing(method, *args, &block)  
     result = ImdbParty::Imdb.new.send(method, *args)
-    return if result.nil?
     result.class == Array ? result.map{|r| ImdbParty::Movie.new(r)} : result
   end
   
   def cleaner(string)
     @cleaners.each do |clean|
-      string.gsub!(/#{clean}/i, ' ')
+      string = string.gsub(/#{clean}/i, ' ')
     end
     
-    string.gsub(/(19|20)\d{2}/, '').gsub(/\s*-\s*/, '').gsub(/\s{2,}/, '').strip
+    [/(19|20\d{2})/, /\./, /\s*-\s*/, /\s{2,}/].each do |regex|
+      string = string.gsub(regex, ' ')
+    end
+    
+    string.strip
   end
   
   def shortest(a,b)
-    Levenshtein.distance(self.super_cleaner(a), self.super_cleaner(self.cleaner(b)), @options[:limit])
+    # If the release contains a year, then the corresponding movie from IMDB should have the same year
+    if year = @search_value.match(/(19|20\d{2})/)
+      return nil unless year[1] == a[:year]
+    end
+     
+    Levenshtein.distance(self.super_cleaner(a[:title]), self.super_cleaner(self.cleaner(b)), @options[:limit])
   end
   
   def super_cleaner(string)

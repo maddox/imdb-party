@@ -1,7 +1,7 @@
 excluded:
   - EXTENDED
   - "((xvid(-[a-z]+)?))"
-  - 480p
+  - "(720|480)p"
   - B(R|D)Rip
   - cam
   - telesync|([^a-z])ts([^a-z]?)
@@ -18,3 +18,5 @@ excluded:
   - UNRATED
   - IMAGiNE
   - SCR
+  - "((ac3(-[a-z]+)?))"
+  - LIMITED
