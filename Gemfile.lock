@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    movie_searcher (0.0.5)
+    movie_searcher (0.0.6)
       hintable_levenshtein
       httparty
 
@@ -38,5 +38,7 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-standalone
+  hintable_levenshtein
+  httparty
   movie_searcher!
   rspec

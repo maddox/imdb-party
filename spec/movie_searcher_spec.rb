@@ -29,7 +29,8 @@ describe MovieSearcher do
     }, {
       :title => "Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE", :iid => "tt1465487"
     },{
-      :title => "Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny", :iid => "tt1536044"
+      :title => "Paranormal Activity 2 2010 UNRATED DVDRip XviD-Larceny", :iid => "tt1536044",
+      :title => "The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC", :iid => "tt0840361"
     }].each do |movie|
       MovieSearcher.find_by_release_name(movie[:title]).imdb_id.should eq(movie[:iid])
     end
