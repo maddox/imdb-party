@@ -30,6 +30,8 @@ describe MovieSearcher do
       :title => "The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC", :iid => "tt0840361"
     }, {
       :title => "I Spit On Your Grave UNRATED 2010 DVDRip XviD-TWiZTED", :iid => "tt1242432"
+    },{
+      :title => "127 Hours 2010 DVDSCR AC3 XViD-T0XiC-iNK", :iid => "tt1542344"
     }].each do |movie|
       MovieSearcher.find_by_release_name(movie[:title]).imdb_id.should eq(movie[:iid])
     end
