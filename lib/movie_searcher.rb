@@ -39,7 +39,7 @@ class MovieSearcher
     current =  @split.length
     
     until current <= 0 do
-      title = @split.take(current).join(' ')
+      title = @split.take(current).join(' ')      
       movies = @options[:imdb].find_by_title(title)
       break if movies.any? and movies.reject{ |movie| self.shortest(movie, title).nil? }.any?
       current -= 1 
