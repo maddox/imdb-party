@@ -1,7 +1,7 @@
 excluded:
   - EXTENDED
   - "((xvid(-[a-z]+)?))"
-  - "(720|480)p"
+  - "(720|480|1080)p"
   - B(R|D)Rip
   - cam
   - telesync|([^a-z])ts([^a-z]?)
