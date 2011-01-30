@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   s.add_dependency('httparty')
-  s.add_dependency('hintable_levenshtein')
+  s.add_dependency('levenshteinish')
   s.add_development_dependency('rspec')
   s.add_development_dependency('autotest-standalone')
   s.add_development_dependency('autotest')

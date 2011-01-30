@@ -1,5 +1,5 @@
 require "imdb_party"
-require 'imdb_party/levenshtein'
+require 'levenshteinish'
 
 class MovieSearcher
   attr_accessor :options, :cleaners

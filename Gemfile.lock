@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     movie_searcher (0.0.8)
-      hintable_levenshtein
       httparty
+      levenshteinish
 
 GEM
   remote: http://rubygems.org/
@@ -20,6 +20,8 @@ GEM
     hintable_levenshtein (0.0.3)
     httparty (0.7.3)
       crack (= 0.1.8)
+    levenshteinish (0.0.1)
+      hintable_levenshtein
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -38,7 +40,7 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-standalone
-  hintable_levenshtein
   httparty
+  levenshteinish
   movie_searcher!
   rspec
