@@ -1,6 +1,6 @@
 require "imdb_party"
 require 'levenshteinish'
-
+require 'mimer_plus'
 class MovieSearcher
   attr_accessor :options, :cleaners
   
@@ -19,6 +19,7 @@ class MovieSearcher
     @cleaners = YAML.load(File.read("#{File.dirname(__FILE__)}/imdb_party/exclude.yaml"))["excluded"]
   end
   
+  # Finds the movie based on the release name of the movie
   def self.find_by_release_name(search_value, options = {})
     this = MovieSearcher.new(options.merge(:search_value => search_value.to_s))
     return if this.to_long?
@@ -37,8 +38,37 @@ class MovieSearcher
     end
   end
   
+  # Finds the movie based on the folder
   def self.find_by_folder(folder_path)
-    # TODO: The method should take a folder as an argument, and try to figure out what movie it contains
+    
+    # Relative path?
+    folder_path = self.relative?(folder_path)
+    
+    # Makes sure that every directory looks the same, an raises an exception if the dir does not exist
+    folder_path = Dir.new(folder_path).path
+    
+    %x{cd '#{folder_path}' && find #{folder_path} -maxdepth 4}.split(/\n/).each do |file|
+      # Locating every textfile in the directory
+      # We're hoping to find a nfo file
+      if Mimer.identify(file).text?
+        result = self.find_by_file(file)
+        return result unless result.nil?
+      end
+    end
+    
+    # Last resort, we hope that the folder contain the release name
+    return self.find_by_release_name(File.split(folder_path).last)
+  end
+  
+  # Try to figure out what method to use, folder or file
+  def self.find_by_download(unknown)
+    unknown = self.relative?(unknown)
+    File.directory?(unknown) ? self.find_by_folder(unknown) : self.find_by_file(unknown)
+  end
+  
+  # Returns the full path of the file/folder
+  def self.relative?(unknown)
+    unknown.match(/^\//) ? unknown : File.expand_path(unknown) 
   end
   
   def to_long?

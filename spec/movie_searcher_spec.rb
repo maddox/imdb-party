@@ -247,3 +247,29 @@ describe MovieSearcher, "should have a working find_by_file method" do
     MovieSearcher.find_by_file('spec/data/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo.bad').should be_nil
   end
 end
+
+describe MovieSearcher, "should have a working find_by_folder method" do
+  it "should return the right imdb id, based on the name of the folder, absolute path" do
+    MovieSearcher.find_by_folder(File.expand_path(File.dirname(__FILE__)) + '/data/127.Hours.2010.DVDSCR.AC3.XViD-T0XiC-iNK').imdb_id.should eq("tt1542344")
+  end
+  
+  it "should return the right imdb id, even though the directory contains some strange files, relative path" do
+    MovieSearcher.find_by_folder('spec/data/some_strange_name').imdb_id.should eq("tt1542344")
+  end
+  
+  it "should raise an error if a non existing folder is given" do
+    lambda {
+      MovieSearcher.find_by_folder('folder?')
+    }.should raise_error(Exception)
+  end
+end
+
+describe MovieSearcher, "should have a working find_by_download" do
+  it "should work with an directoy" do
+    MovieSearcher.find_by_download('spec/data/some_strange_name').imdb_id.should eq("tt1542344")
+  end
+  
+  it "should work with a file" do
+    MovieSearcher.find_by_download('spec/data/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo').imdb_id.should eq("tt0804497")
+  end
+end

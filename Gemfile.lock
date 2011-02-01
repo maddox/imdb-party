@@ -4,6 +4,7 @@ PATH
     movie_searcher (0.0.8)
       httparty
       levenshteinish
+      mimer_plus
 
 GEM
   remote: http://rubygems.org/
@@ -22,6 +23,7 @@ GEM
       crack (= 0.1.8)
     levenshteinish (0.0.1)
       hintable_levenshtein
+    mimer_plus (0.0.4)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -42,5 +44,6 @@ DEPENDENCIES
   autotest-standalone
   httparty
   levenshteinish
+  mimer_plus
   movie_searcher!
   rspec
