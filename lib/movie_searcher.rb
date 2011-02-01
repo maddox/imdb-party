@@ -38,7 +38,7 @@ class MovieSearcher
   end
   
   def self.find_by_folder(folder_path)
-    # TODO
+    # TODO: The method should take a folder as an argument, and try to figure out what movie it contains
   end
   
   def to_long?
