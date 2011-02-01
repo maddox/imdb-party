@@ -237,3 +237,13 @@ describe MovieSearcher, "should have a cleaner" do
     @movie.cleaner("The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC").should_not match(/-/)
   end
 end
+
+describe MovieSearcher, "should have a working find_by_file method" do
+  it "should return the right imdb id, absolute path" do
+    MovieSearcher.find_by_file(File.expand_path(File.dirname(__FILE__)) + '/data/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo').imdb_id.should eq("tt0804497")
+  end
+  
+  it "should not return a movie, due to the missing link in the file, relative path" do
+    MovieSearcher.find_by_file('spec/data/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo.bad').should be_nil
+  end
+end

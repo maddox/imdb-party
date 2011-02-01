@@ -30,6 +30,13 @@ class MovieSearcher
     this.options[:details] ? self.find_movie_by_id(movie.imdb_id) : movie
   end
   
+  # Finds the movie based on the nfo file (or similar file)
+  def self.find_by_file(file_path)
+    if File.read(file_path) =~ /imdb\.com\/title\/(tt\d+)/
+      return self.find_movie_by_id($1)
+    end
+  end
+  
   def to_long?
     @split = self.cleaner(@search_value).split(@options[:split])    
     @split.length > @options[:long]
