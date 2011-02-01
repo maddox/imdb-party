@@ -37,6 +37,10 @@ class MovieSearcher
     end
   end
   
+  def self.find_by_folder(folder_path)
+    # TODO
+  end
+  
   def to_long?
     @split = self.cleaner(@search_value).split(@options[:split])    
     @split.length > @options[:long]
