@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "movie_searcher"
-  s.version     = "0.0.9"
+  s.version     = "0.1.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Linus Oleander", "Jon Maddox"]
   s.email       = ["linus@oleander.nu", "jon@mustacheinc.com"]
