@@ -63,7 +63,7 @@ class MovieSearcher
   # Try to figure out what method to use, folder or file
   def self.find_by_download(unknown)
     unknown = self.relative?(unknown)
-    File.directory?(unknown) ? self.find_by_folder(unknown) : self.find_by_file(unknown)
+    File.directory?(unknown) ? self.find_by_folder(unknown) : self.find_by_release_name(File.split(unknown).last)
   end
   
   # Returns the full path of the file/folder

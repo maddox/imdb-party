@@ -43,6 +43,7 @@ Start `irb` and include the gem, `require 'movie_searcher'`
     
     $ MovieSearcher.find_by_folder('~/Downloads/Its.Kind.of.a.Funny.Story.2010.DVDRip.XviD-AMIABLE')
     => #<ImdbParty::Movie:0x10198a060 ... >
+    
 ### Find a movie based on a file containing and imdb link
   
   This method does not take any folder that starts with tilde **~** sign.
@@ -58,7 +59,6 @@ If no link or no files are found, it will fall back on the name of the folder.
     
     $ MovieSearcher.find_by_download('/Users/linus/Downloads/some_thing_unknown')
     => #<ImdbParty::Movie:0x10198a060 ... >
-
 
 ### Find the top 250 movies of all time
 
