@@ -8,6 +8,7 @@ It uses IMDB's API that their iPhone applications rely on.
 It's build on top of [maddox's](https://github.com/maddox) [imdb-party](https://github.com/maddox/imdb-party) but adds some extra functionality and bugs fixes.
 
 ## What makes this gem so awesome?
+
 MovieSearcher has a really cool feature (*method*) called `find_by_release_name` that makes it possible to search for a movie based on the release name.
 You can for example specify ***Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE*** and it will return the not to good [*Heartbreaker*](http://www.imdb.com/title/tt1465487/) by [*Pascal Chaumeil*](http://www.imdb.com/name/nm0154312/)
 
@@ -32,6 +33,32 @@ Start `irb` and include the gem, `require 'movie_searcher'`
     => 8.9
     $ movie.certification 
     => "PG-13"
+    
+### Find a movie based on the release name
+    
+    $ MovieSearcher.find_by_release_name("Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE").imdb_id 
+    => tt1465487
+    
+### Find a movie based on a folder
+    
+    $ MovieSearcher.find_by_folder('~/Downloads/Its.Kind.of.a.Funny.Story.2010.DVDRip.XviD-AMIABLE')
+    => #<ImdbParty::Movie:0x10198a060 ... >
+### Find a movie based on a file containing and imdb link
+  
+  This method does not take any folder that starts with tilde **~** sign.
+  
+    $ MovieSearcher.find_by_file('/Users/linus/Downloads/Its.Kind.of.a.Funny.Story.2010.DVDRip.XviD-AMIABLE/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo')
+    => #<ImdbParty::Movie:0x10198a060 ... >
+    
+### Find a movie based on a downloaded thingy (folder or file)
+
+This method takes anything that you have download and tries to figure out what movie you're talking about.
+If a folder is passed it will list all text files in the folder and try to find an imdb link.
+If no link or no files are found, it will fall back on the name of the folder.
+    
+    $ MovieSearcher.find_by_download('/Users/linus/Downloads/some_thing_unknown')
+    => #<ImdbParty::Movie:0x10198a060 ... >
+
 
 ### Find the top 250 movies of all time
 
@@ -43,12 +70,8 @@ Start `irb` and include the gem, `require 'movie_searcher'`
     $ MovieSearcher.popular_shows 
     => [#<ImdbParty::Movie:0x101ff2858 @imdb_id="tt1327801", @poster_url="http://ia.media-imdb.com/images/M/MV5BMTYxMjYxNjQxNl5BMl5BanBnXkFtZTcwNTU5Nzk4Mw@@._V1_.jpg", @year="2009", @title="Glee">, ... ]
     
-### Search for a release name
-    
-    $ MovieSearcher.find_by_release_name("Heartbreaker 2010 LIMITED DVDRip XviD-SUBMERGE").imdb_id 
-    => tt1465487
-
 ### Some configure alternatives
+
 You can pass some options to the `find_by_release_name` method to specify how it should behave.
 
 Here is an example.
