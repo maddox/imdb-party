@@ -33,7 +33,16 @@ class MovieSearcher
   
   # Finds the movie based on the nfo file (or similar file)
   def self.find_by_file(file_path)
-    if File.read(file_path) =~ /imdb\.com\/title\/(tt\d+)/
+    data = File.read(file_path)
+    
+    # If the file is encoded in something non valid (according to ruby), then it can't be read here
+    # The {valid_encoding} method is not included in ruby 1.8.7, that's why i'm using {respond_to?}
+    # More info here: http://blog.grayproductions.net/articles/ruby_19s_string
+    # If the user uses 1.8.7 and the string isn't encoded in UTF-8, nothing happens.
+    # The script won't throw an exception as it does in 1.9.2
+    return if data.respond_to?(:valid_encoding?) and not data.valid_encoding?
+      
+    if data =~ /imdb\.com\/title\/(tt\d+)/
       return self.find_movie_by_id($1)
     end
   end

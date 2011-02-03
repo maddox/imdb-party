@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe MovieSearcher do
@@ -271,5 +272,11 @@ describe MovieSearcher, "should have a working find_by_download" do
   
   it "should work with a file" do
     MovieSearcher.find_by_download('spec/data/its.kind.of.a.funny.story.2010.dvdrip.xvid-amiable.nfo').imdb_id.should eq("tt0804497")
+  end
+end
+
+describe MovieSearcher, "should work after fixing these bugs" do
+  it "should work with strange encoded strings" do
+    MovieSearcher.find_by_download('spec/data/127 Hours 2010 WEBSCR XviD AC3-Rx').imdb_id.should eq("tt1542344")
   end
 end

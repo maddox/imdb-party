@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    movie_searcher (0.1.1)
+    movie_searcher (0.1.2)
       httparty
       levenshteinish
       mimer_plus
@@ -42,8 +42,5 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-standalone
-  httparty
-  levenshteinish
-  mimer_plus
   movie_searcher!
   rspec
