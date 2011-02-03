@@ -47,7 +47,7 @@ class MovieSearcher
     # Makes sure that every directory looks the same, an raises an exception if the dir does not exist
     folder_path = Dir.new(folder_path).path
     
-    %x{cd '#{folder_path}' && find #{folder_path} -maxdepth 4}.split(/\n/).each do |file|
+    %x{cd '#{folder_path}' && find '#{folder_path}' -maxdepth 4}.split(/\n/).each do |file|
       # Locating every textfile in the directory
       # We're hoping to find a nfo file
       if Mimer.identify(file).text?
