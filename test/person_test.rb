@@ -2,11 +2,11 @@ require 'test_helper'
 
 class PersonTest < Test::Unit::TestCase
   context "a person" do
-    setup do 
+    setup do
       @imdb = ImdbParty::Imdb.new
       @movie = @imdb.find_movie_by_id("tt0382932")
     end
-    
+
     context "actors" do
       should "have a name" do
         assert_equal "Patton Oswalt", @movie.actors.first.name
@@ -22,7 +22,7 @@ class PersonTest < Test::Unit::TestCase
         assert_equal "Brad Bird", @movie.directors.first.name
       end
 
-      should "have not have a role" do
+      should "not have a role" do
         assert_equal nil, @movie.directors.first.role
       end
     end
@@ -32,7 +32,7 @@ class PersonTest < Test::Unit::TestCase
         assert_equal "Brad Bird", @movie.writers.first.name
       end
 
-      should "have not have a role" do
+      should "not have a role" do
         assert_equal nil, @movie.writers.first.role
       end
     end

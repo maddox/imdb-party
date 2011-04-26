@@ -15,7 +15,7 @@ module ImdbParty
       movie_results = []
       results = self.class.get('/find', :query => {:q => title}).parsed_response
       
-      if results["data"]["results"]
+      if results["data"] && results["data"]["results"]
         results["data"]["results"].each do |result_section|
           result_section["list"].each do |r|
             next unless r["tconst"] && r["title"]

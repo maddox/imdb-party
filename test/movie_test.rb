@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MovieTest < Test::Unit::TestCase
   context "a movie" do
-    setup do 
+    setup do
       @imdb = ImdbParty::Imdb.new
       @movie = @imdb.find_movie_by_id("tt0382932")
     end
@@ -32,7 +32,7 @@ class MovieTest < Test::Unit::TestCase
     end
   
     should "have a poster_url" do
-      assert_equal "http://ia.media-imdb.com/images/M/MV5BMTMzODU0NTkxMF5BMl5BanBnXkFtZTcwMjQ4MzMzMw@@._V1_.jpg", @movie.poster_url
+      assert_match /http:\/\/ia.media-imdb.com\/images\/.*/, @movie.poster_url
     end
   
     should "have a release date" do
