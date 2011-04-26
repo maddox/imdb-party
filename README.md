@@ -5,6 +5,9 @@
 ### Create an instance
 
     imdb = ImdbParty::Imdb.new
+    imdb = ImdbParty::Imdb.new(:anonymize => true) # this will anonymize your requests to prevent getting your ip banned
+
+
 ### Search for a movie by title
 
     imdb.find_by_title("The Dark Knight") => [{:title => "The Dark Knight", :year => "2008", :imdb_id => "tt0468569"}, {:title => "Batman Unmasked", ...}]
