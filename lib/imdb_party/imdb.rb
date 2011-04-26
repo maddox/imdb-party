@@ -7,6 +7,9 @@ module ImdbParty
     base_uri 'app.imdb.com'
     default_params = {"api" => "v1", "appid" => "iphone1_1", "apiPolicy" => "app1_1", "apiKey" => "2wex6aeu6a8q9e49k7sfvufd6rhh0n", "locale" => "en_US", "timestamp" => Time.now.to_i, "sig" => "heres my signature"}
 
+    def initialize(options={})
+      self.class.base_uri 'http://anonymouse.org/cgi-bin/anon-www.cgi/http://app.imdb.com' if options[:anonymize]
+    end
     
     def find_by_title(title)
       movie_results = []
