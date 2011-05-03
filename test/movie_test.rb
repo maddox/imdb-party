@@ -45,7 +45,7 @@ class MovieTest < Test::Unit::TestCase
   
     should "have trailers" do
       assert_equal Hash, @movie.trailers.class
-      assert_equal 4, @movie.trailers.keys.size
+      assert_equal 2, @movie.trailers.keys.size
       assert_equal "http://www.totaleclips.com/Player/Bounce.aspx?eclipid=e27826&bitrateid=461&vendorid=102&type=.mp4", @movie.trailers[@movie.trailers.keys.first]
     end
   

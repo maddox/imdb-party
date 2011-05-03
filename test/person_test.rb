@@ -9,11 +9,11 @@ class PersonTest < Test::Unit::TestCase
 
     context "actors" do
       should "have a name" do
-        assert_equal "Patton Oswalt", @movie.actors.first.name
+        assert_equal "Brad Garrett", @movie.actors.first.name
       end
 
       should "have a role" do
-        assert_equal "Remy", @movie.actors.first.role
+        assert_equal "Gusteau", @movie.actors.first.role
       end
     end
 
