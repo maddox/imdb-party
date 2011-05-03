@@ -5,15 +5,33 @@ module ImdbParty
     cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
     
     base_uri 'app.imdb.com'
-    default_params = {"api" => "v1", "appid" => "iphone1_1", "apiPolicy" => "app1_1", "apiKey" => "2wex6aeu6a8q9e49k7sfvufd6rhh0n", "locale" => "en_US", "timestamp" => Time.now.to_i, "sig" => "heres my signature"}
 
     def initialize(options={})
-      self.class.base_uri 'http://anonymouse.org/cgi-bin/anon-www.cgi/http://app.imdb.com' if options[:anonymize]
+      self.class.base_uri 'anonymouse.org/cgi-bin/anon-www.cgi/http://app.imdb.com' if options[:anonymize]
+    end
+    
+    def build_url(path, params={})
+      default_params = {"api" => "v1", "appid" => "iphone1_1", "apiPolicy" => "app1_1", "apiKey" => "2wex6aeu6a8q9e49k7sfvufd6rhh0n", "locale" => "en_US", "timestamp" => Time.now.to_i}
+
+      query_params = default_params.merge(params)
+      query_param_array = []
+      
+      host = self.class.base_uri.gsub('http://', '').to_s
+
+      query_params.each_pair{|key, value| query_param_array << "#{key}=#{URI.escape(value.to_s)}" }
+      uri = URI::HTTP.build(:scheme => 'https', :host => host, :path => path, :query => query_param_array.join("&"))
+
+      query_param_array << "sig=app1-#{OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), default_params["apiKey"], uri.to_s)}"
+
+      uri = URI::HTTP.build(:scheme => 'https', :host => host, :path => path, :query => query_param_array.join("&"))
+      uri.to_s
     end
     
     def find_by_title(title)
       movie_results = []
-      results = self.class.get('/find', :query => {:q => title}).parsed_response
+      url = build_url('/find', :q => title)
+      
+      results = self.class.get(url).parsed_response
       
       if results["data"] && results["data"]["results"]
         results["data"]["results"].each do |result_section|
@@ -30,17 +48,23 @@ module ImdbParty
     end
 
     def find_movie_by_id(imdb_id)
-      result = self.class.get('/title/maindetails', :query => {:tconst => imdb_id}).parsed_response
+      url = build_url('/title/maindetails', :tconst => imdb_id)
+      
+      result = self.class.get(url).parsed_response
       Movie.new(result["data"])
     end
     
     def top_250
-      results = self.class.get('/chart/top').parsed_response
+      url = build_url('/chart/top')
+
+      results = self.class.get(url).parsed_response
       results["data"]["list"]["list"].map { |r| {:title => r["title"], :imdb_id => r["tconst"], :year => r["year"], :poster_url => (r["image"] ? r["image"]["url"] : nil)} }
     end
 
     def popular_shows
-      results = self.class.get('/chart/tv').parsed_response
+      url = build_url('/chart/tv')
+
+      results = self.class.get(url).parsed_response
       results["data"]["list"].map { |r| {:title => r["title"], :imdb_id => r["tconst"], :year => r["year"], :poster_url => (r["image"] ? r["image"]["url"] : nil)} }
     end
     
