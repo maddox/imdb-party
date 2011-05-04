@@ -16,14 +16,16 @@ module ImdbParty
       query_params = default_params.merge(params)
       query_param_array = []
       
-      host = self.class.base_uri.gsub('http://', '').to_s
-
+      base_uri = URI.parse(self.class.base_uri)
+      base_host = base_uri.host
+      the_path = base_uri.path + path
+      
       query_params.each_pair{|key, value| query_param_array << "#{key}=#{URI.escape(value.to_s)}" }
-      uri = URI::HTTP.build(:scheme => 'https', :host => host, :path => path, :query => query_param_array.join("&"))
+      uri = URI::HTTP.build(:scheme => 'https', :host => base_host, :path => the_path, :query => query_param_array.join("&"))
 
       query_param_array << "sig=app1-#{OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), default_params["apiKey"], uri.to_s)}"
 
-      uri = URI::HTTP.build(:scheme => 'https', :host => host, :path => path, :query => query_param_array.join("&"))
+      uri = URI::HTTP.build(:scheme => 'https', :host => base_host, :path => the_path, :query => query_param_array.join("&"))
       uri.to_s
     end
     
