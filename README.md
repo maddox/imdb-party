@@ -20,6 +20,12 @@
     movie.rating => 8.1
     movie.certification => "PG-13"
 
+### Get a movie trailer poster
+    
+    movie = imdb.find_movie_by_id("tt1210166")
+
+    movie.slate_url => "http://ia.media-imdb.com/images/M/MV5BODM1NDMxMTI3M15BMl5BanBnXkFtZTcwMDAzODY1Ng@@._V1_.jpg"
+
 ### Find the top 250 movies of all time
 
     imdb.top_250 => [{:title => "Shawshank Redemption", :year => "1994", :imdb_id => "tt0111161"}, {:title => "The Godfather", ...}]

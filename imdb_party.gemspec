@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "test/movie_test.rb",
      "test/person_test.rb",
      "test/search_test.rb",
+     "test/slate_test.rb",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/maddox/imdb_party}
@@ -43,6 +44,7 @@ Gem::Specification.new do |s|
     "test/movie_test.rb",
      "test/person_test.rb",
      "test/search_test.rb",
+     "test/slate_test.rb",
      "test/test_helper.rb"
   ]
 
