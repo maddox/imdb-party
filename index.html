@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>IMDB Party by maddox</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>IMDB Party</h1>
+        <p>Ruby IMDB client using the IMDB JSON API available for their iOS app</p>
+        <p class="view"><a href="https://github.com/maddox/imdb-party">View the Project on GitHub <small>maddox/imdb-party</small></a></p>
+        <ul>
+          <li><a href="https://github.com/maddox/imdb-party/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/maddox/imdb-party/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/maddox/imdb-party">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>Create an instance</h3>
+
+<div class="highlight">
+<pre><span class="n">imdb</span> <span class="o">=</span> <span class="no">ImdbParty</span><span class="o">::</span><span class="no">Imdb</span><span class="o">.</span><span class="n">new</span>
+<span class="n">imdb</span> <span class="o">=</span> <span class="no">ImdbParty</span><span class="o">::</span><span class="no">Imdb</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:anonymize</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<h3>Search for a movie by title</h3>
+
+<div class="highlight">
+<pre><span class="n">imdb</span><span class="o">.</span><span class="n">find_by_title</span><span class="p">(</span><span class="s2">"The Dark Knight"</span><span class="p">)</span> <span class="o">=&gt;</span> 
+
+<span class="o">[</span><span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"The Dark Knight"</span><span class="p">,</span> <span class="ss">:year</span> <span class="o">=&gt;</span> <span class="s2">"2008"</span><span class="p">,</span> <span class="ss">:imdb_id</span> <span class="o">=&gt;</span> <span class="s2">"tt0468569"</span><span class="p">},</span> 
+ <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"Batman Unmasked"</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">}</span><span class="o">]</span>
+</pre>
+</div>
+
+
+<h3>Get a movie by its imdb_id</h3>
+
+<div class="highlight">
+<pre><span class="n">movie</span> <span class="o">=</span> <span class="n">imdb</span><span class="o">.</span><span class="n">find_movie_by_id</span><span class="p">(</span><span class="s2">"tt0468569"</span><span class="p">)</span>
+
+<span class="n">movie</span><span class="o">.</span><span class="n">title</span> <span class="o">=&gt;</span> <span class="s2">"The Dark Knight"</span>
+<span class="n">movie</span><span class="o">.</span><span class="n">rating</span> <span class="o">=&gt;</span> <span class="mi">8</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">movie</span><span class="o">.</span><span class="n">certification</span> <span class="o">=&gt;</span> <span class="s2">"PG-13"</span>
+</pre>
+</div>
+
+
+<h3>Find the top 250 movies of all time</h3>
+
+<div class="highlight">
+<pre><span class="n">imdb</span><span class="o">.</span><span class="n">top_250</span> <span class="o">=&gt;</span> 
+
+<span class="o">[</span><span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"Shawshank Redemption"</span><span class="p">,</span> <span class="ss">:year</span> <span class="o">=&gt;</span> <span class="s2">"1994"</span><span class="p">,</span> <span class="ss">:imdb_id</span> <span class="o">=&gt;</span> <span class="s2">"tt0111161"</span><span class="p">},</span> 
+ <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"The Godfather"</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">}</span><span class="o">]</span>
+</pre>
+</div>
+
+
+<h3>Get the currently popular tv shows</h3>
+
+<div class="highlight">
+<pre><span class="n">imdb</span><span class="o">.</span><span class="n">popular_shows</span> <span class="o">=&gt;</span>
+
+<span class="o">[</span><span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"Glee"</span><span class="p">,</span> <span class="ss">:year</span> <span class="o">=&gt;</span> <span class="s2">"2009"</span><span class="p">,</span> <span class="ss">:imdb_id</span> <span class="o">=&gt;</span> <span class="s2">"tt1327801"</span><span class="p">},</span> 
+ <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">"Dexter"</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">}</span><span class="o">]</span>
+</pre>
+</div>
+
+
+<h2>Contributing</h2>
+
+<p>Pull Requests from topic branches only please</p>
+
+<h2>Contributors</h2>
+
+<p><a href="https://github.com/brianmario">Brian Lopez</a><br><a href="https://github.com/toy">Ivan</a><br><a href="https://github.com/fernandobrito">Fernando Brito</a></p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/maddox">maddox</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
