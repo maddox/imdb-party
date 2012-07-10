@@ -36,7 +36,6 @@ module ImdbParty
       movie_results = []
 
       results = self.class.get("http://www.imdb.com/xml/find", :query => default_find_by_title_params).parsed_response
-      puts results.inspect
 
       keys = ["title_popular", "title_exact", "title_approx", "title_substring"]
 
