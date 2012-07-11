@@ -27,3 +27,15 @@
 ### Get the currently popular tv shows
 
     imdb.popular_shows => [{:title => "Glee", :year => "2009", :imdb_id => "tt1327801"}, {:title => "Dexter", ...}]
+
+## Running the tests
+
+### Install dependencies
+
+    gem install jeweler
+    gem install shoulda
+    gem install httparty
+
+### Run the tests
+
+    rake test
