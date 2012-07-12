@@ -1,6 +1,6 @@
 module ImdbParty
   class Movie
-    attr_accessor :imdb_id, :title, :directors, :writers, :tagline, :company, :plot, :runtime, :rating, :poster_url, :release_date, :certification, :genres, :actors, :trailers, :slate_url
+    attr_accessor :imdb_id, :title, :directors, :writers, :tagline, :company, :plot, :runtime, :rating, :poster_url, :release_date, :certification, :genres, :actors, :trailers, :trailer_url
 
     def initialize(options={})
       @imdb_id = options["tconst"]
@@ -13,8 +13,7 @@ module ImdbParty
       @release_date = options["release_date"]["normal"] if options["release_date"] && options["release_date"]["normal"]
       @certification = options["certificate"]["certificate"] if options["certificate"] && options["certificate"]["certificate"]
       @genres = options["genres"] || []
-      # parse trailer poster
-	 @slate_url = options["trailer"]["slates"][0]["url"] if(options["trailer"] && options["trailer"]["slates"] && options["trailer"]["slates"][0])
+	    @trailer_url = options["trailer"]["slates"][0]["url"] if(options["trailer"] && options["trailer"]["slates"] && options["trailer"]["slates"][0])
 
       # parse directors
       @directors = options["directors_summary"] ? options["directors_summary"].map { |d| Person.new(d) } : []

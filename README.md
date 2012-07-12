@@ -24,7 +24,7 @@
     
     movie = imdb.find_movie_by_id("tt1210166")
 
-    movie.slate_url => "http://ia.media-imdb.com/images/M/MV5BODM1NDMxMTI3M15BMl5BanBnXkFtZTcwMDAzODY1Ng@@._V1_.jpg"
+    movie.trailer_url => "http://ia.media-imdb.com/images/M/MV5BODM1NDMxMTI3M15BMl5BanBnXkFtZTcwMDAzODY1Ng@@._V1_.jpg"
 
 ### Find the top 250 movies of all time
 
