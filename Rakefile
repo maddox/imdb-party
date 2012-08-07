@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/maddox/imdb_party"
     gem.authors = ["Jon Maddox"]
     gem.add_development_dependency "shoulda"
-    gem.add_dependency "httparty"
+    gem.add_dependency "httparty", '= 0.8.2'
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
