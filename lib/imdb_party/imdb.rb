@@ -1,8 +1,8 @@
 module ImdbParty
   class Imdb
     include HTTParty
-    include HTTParty::Icebox
-    cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
+#     include HTTParty::Icebox
+#     cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
 
     base_uri 'app.imdb.com'
     format :json
