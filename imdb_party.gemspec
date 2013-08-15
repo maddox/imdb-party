@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
     "test/test_helper.rb",
     "test/trailer_test.rb"
   ]
-  s.homepage = "http://github.com/maddox/imdb_party"
+  s.homepage = "http://github.com/maddox/imdb-party"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.23"
   s.summary = "IMDB client using the IMDB API that their iPhone app uses"
