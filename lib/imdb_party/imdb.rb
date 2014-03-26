@@ -31,7 +31,7 @@ module ImdbParty
     end
 
     def find_by_title(title)
-      default_find_by_title_params = {"json" => "1", "nr" => 1, "tt" => "on", "q" => title}
+      default_find_by_title_params = {"json" => "1", "nr" => 1, "tt" => "on", "ttype" => "ft", "q" => title}
 
       movie_results = []
 
